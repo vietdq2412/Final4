@@ -10,6 +10,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
 @Controller
 @RequestMapping("/city")
 public class CityController {
@@ -59,10 +62,13 @@ public class CityController {
     }
 
     @GetMapping("/delete/{id}")
-    public ModelAndView delete(@PathVariable Long id) {
-        ModelAndView modelAndView = new ModelAndView("index");
+    public void delete(@PathVariable Long id, HttpServletResponse response) {
         cityService.delete(id);
-        return modelAndView;
+        try {
+            response.sendRedirect("/");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @GetMapping("/detail/{id}")
