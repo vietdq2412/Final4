@@ -23,4 +23,10 @@ public class HomeController {
         modelAndView.addObject("cityList",cityService.findAll());
         return modelAndView;
     }
+    @GetMapping("/home")
+    public ModelAndView home(){
+        ModelAndView modelAndView = new ModelAndView("index");
+        modelAndView.addObject("cityList",cityService.findAll());
+        return modelAndView;
+    }
 }
